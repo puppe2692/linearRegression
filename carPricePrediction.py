@@ -42,6 +42,7 @@ except Exception as e:
     exit(e)
 
 result = t0 + (t1 * mileAge_to_estimate)
-result = result * (max(Y) - min(Y)) + min(Y)
+if result > 0:
+    result = result * (max(Y) - min(Y)) + min(Y)
 print("Estimated Price:")
-print(result)
+print(f"{result:.2f}$")
