@@ -22,7 +22,7 @@ try:
     t1 = float(f.readline())
 
 except Exception:
-    print("ici")
+    print("No training value upload yet")
 
 # Enter mileage to estimate
 while True:
@@ -35,14 +35,6 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a numeric value.")
 
-try:
-    mileAge_to_estimate = (mileAge_to_estimate - min(X)) / (max(X) - min(X))
-
-except Exception as e:
-    exit(e)
-
 result = t0 + (t1 * mileAge_to_estimate)
-if result > 0:
-    result = result * (max(Y) - min(Y)) + min(Y)
 print("Estimated Price:")
 print(f"{result:.2f}$")

@@ -25,8 +25,8 @@ y = (Y - minY) / (maxY - minY)
 # init variable for gradient
 t0_tmp = 0
 t1_tmp = 0
-iterations = 1000
-alpha = 0.1
+iterations = 10000
+alpha = 0.01
 
 
 def gradient_function(x, y, w, b):
@@ -69,6 +69,12 @@ def gradient_descent(x, y, t0, t1, alpha, iterations, gradient_function):
 
 t1_final, t0_final = gradient_descent(x, y, t0_tmp, t1_tmp, alpha,
                                       iterations, gradient_function)
+t1_save = t1_final
+t0_save = t0_final
+
+t1_final = (maxY - minY) * t1_final / (maxX - minX)
+t0_final = minY + ((maxY - minY) * t0_final) + t1_final * (1 - minX)
+
 
 # Output in the file
 with open(output_file, 'w') as f:
@@ -77,6 +83,7 @@ with open(output_file, 'w') as f:
     f.write(str(t1_final))
 
 
+# Visu
 # Added for line
 def normalize(lstX, x):
     return (x - min(lstX)) / (max(lstX) - min(lstX))
@@ -86,11 +93,11 @@ def denormalize(lstX, x):
     return x * (max(lstX) - min(lstX)) + min(lstX)
 
 
-# Visu print
+# print visu
 lx = [minX, maxX]
 ly = []
 for j in lx:
-    j = t1_final * normalize(X, j) + t0_final
+    j = t1_save * normalize(X, j) + t0_save
     price = denormalize(Y, j)
     ly.append(price)
 
